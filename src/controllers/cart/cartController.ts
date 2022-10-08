@@ -13,13 +13,13 @@ export class CartController {
         const productId = getProductIdFromParam(req)
         const newQty = parseInt(req.query.limit as string)
         cartService.updateCartQuantity(productId, newQty)
-        res.status(202)
+        res.sendStatus(202)
     }
 
     public static deleteCart(req: Request, res: Response, next: NextFunction) {
         const productId = getProductIdFromParam(req)
         cartService.removeFromCartByProductId(productId)
-        res.status(202)
+        res.sendStatus(202)
     }
 
 }

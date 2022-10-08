@@ -1,5 +1,6 @@
 import { Request, Response, Application } from 'express';
 import cartRoute from "./cartRoute"
+import orderRoute from "./orderRoute"
 export class Routes {
 
   public routes(app: Application): void {
@@ -9,5 +10,6 @@ export class Routes {
       });
     
       app.use("/cart", cartRoute)
+      app.use("/order", orderRoute)
   }
 }

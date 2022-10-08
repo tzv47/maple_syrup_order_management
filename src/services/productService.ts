@@ -19,3 +19,5 @@ class ProductService {
         return product!!.maxQty - productInCarts!!.qty
     }
 }
+
+export default new ProductService()
