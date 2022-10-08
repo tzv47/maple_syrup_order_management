@@ -1,4 +1,5 @@
 import { Request, Response, Application } from 'express';
+import cartRoute from "./cartRoute"
 export class Routes {
 
   public routes(app: Application): void {
@@ -6,5 +7,7 @@ export class Routes {
       .get((req: Request, res: Response) => {
         res.status(200).send('Healthy!!!');
       });
+    
+      app.use("/cart", cartRoute)
   }
 }

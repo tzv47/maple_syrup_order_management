@@ -1,7 +1,7 @@
 export interface CartLineDto {
-  productId: String;
-  name: String;
-  image: String;
-  price: Number;
-  qty: Number;
+  productId: string;
+  name: string;
+  image: string;
+  price: number;
+  qty: number;
 }
