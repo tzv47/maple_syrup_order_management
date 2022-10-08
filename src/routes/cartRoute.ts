@@ -7,4 +7,6 @@ router.get("", CartController.getCart);
 
 router.patch("", CartController.updateCartQty);
 
+router.delete("", CartController.deleteCart);
+
 export default router;

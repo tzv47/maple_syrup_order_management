@@ -19,6 +19,7 @@ export class CartController {
     public static deleteCart(req: Request, res: Response, next: NextFunction) {
         const productId = getProductIdFromParam(req)
         cartService.removeFromCartByProductId(productId)
+        res.status(202)
     }
 
 }
