@@ -13,7 +13,7 @@ class ProductService {
         return products
     }
 
-    public getProductRemainingQty(productId: string): Number {
+    public getProductRemainingQty(productId: string): number {
         const product = this.getProduct(productId)
         const productInCarts = CartService.findByProductId(productId)
         return product!!.maxQty - productInCarts!!.qty

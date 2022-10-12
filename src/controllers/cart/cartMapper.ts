@@ -1,5 +1,5 @@
-import { ICart } from "../../models";
-import { CartLineDto } from "./dtos/cart.dto";
+import { ICart } from '../../models';
+import { CartLineDto } from './dtos/cart.dto';
 
 class CartMapper {
   public toCartLineDtos(carts: Array<ICart>): Array<CartLineDto> {
@@ -9,7 +9,7 @@ class CartMapper {
         name: cart.name,
         image: cart.image,
         price: cart.price,
-        qty: cart.qty,
+        qty: cart.qty
       })
     );
   }

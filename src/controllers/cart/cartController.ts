@@ -1,6 +1,5 @@
-import { Request, Response, NextFunction, query } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import cartService from '../../services/cartService';
-import { getProductIdFromParam } from '../../utils/utils';
 import cartMapper from './cartMapper';
 export class CartController {
 
@@ -10,14 +9,14 @@ export class CartController {
     }
 
     public static updateCartQty(req: Request, res: Response, next: NextFunction) {
-        const productId = getProductIdFromParam(req)
-        const newQty = parseInt(req.query.limit as string)
+        const productId = req.params.productId
+        const { newQty } = req.body
         cartService.updateCartQuantity(productId, newQty)
         res.sendStatus(202)
     }
 
     public static deleteCart(req: Request, res: Response, next: NextFunction) {
-        const productId = getProductIdFromParam(req)
+        const productId = req.params.productId
         cartService.removeFromCartByProductId(productId)
         res.sendStatus(202)
     }
