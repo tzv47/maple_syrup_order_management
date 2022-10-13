@@ -7,6 +7,7 @@
     "build": "npx tsc",
     "start": "node build/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q build/index.js\"",
+    "docker:dev": "npm install && rimraf build && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "abu_talha",

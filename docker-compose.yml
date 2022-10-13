@@ -1,9 +1,12 @@
 version: "3"
 services:
-  todo-app:
-    container_name: maple_syrup_order_management
-    build:
-      context: .
-      dockerfile: .Dockerfile
+  main:
+    image: node:12
+    working_dir: /usr/src/app
+    container_name: 'maple_syrup_order_management-main'
     ports:
-      - "8080:8000"
+      - "8000:8000"
+    volumes:
+      - './:/usr/src/app'
+      - '/root/.npm'
+    command: bash -c "npm run dev"
