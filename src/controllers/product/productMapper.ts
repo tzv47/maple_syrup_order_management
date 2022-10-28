@@ -1,4 +1,5 @@
-import { IMapleSyrup } from "../../models";
+
+import { IMapleSyrup } from "../../models/Product";
 import { CatalogueItemDto } from "./dtos/catalogueItem.dto";
 import { MapleSyrupDto } from "./dtos/mapleSyrup.dto";
 

@@ -4,15 +4,15 @@ import productMapper from './productMapper';
 
 export class ProductController {
 
-    public static getAllProduct(req: Request, res: Response, next: NextFunction) {
-        const productList = productService.getAll()
+    public static async getAllProduct(req: Request, res: Response, next: NextFunction) {
+        const productList = await productService.getAll()
         res.send(productList.map(product => productMapper.toCatalogueItemDto(product))).status(200)
     }
 
-    public static getProduct(req: Request, res: Response, next: NextFunction) {
+    public static async getProduct(req: Request, res: Response, next: NextFunction) {
         const productId = req.params.id
-        const product = productService.getProduct(productId)
-        const remainingAmount = productService.getProductRemainingQty(productId)
+        const product = await productService.getProduct(productId)
+        const remainingAmount = await productService.getProductRemainingQty(productId)
         res.send(productMapper.toMapleSyrupDto(product!!, remainingAmount)).status(200)
     }
 }
