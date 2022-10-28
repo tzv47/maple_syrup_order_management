@@ -6,6 +6,6 @@ export interface Order {
 }
 
 export enum OrderStatus {
-    CREATED,
-    FAILED
+    CREATED = "CREATED",
+    FAILED = "FAILED"
 }

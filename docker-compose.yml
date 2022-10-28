@@ -1,12 +1,26 @@
 version: "3"
 services:
-  main:
-    image: node:12
-    working_dir: /usr/src/app
-    container_name: 'maple_syrup_order_management-main'
-    ports:
-      - "8000:8000"
+  # main:
+  #   image: node:12
+  #   working_dir: /usr/src/app
+  #   container_name: 'maple_syrup_order_management-main'
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - './:/usr/src/app'
+  #     - '/root/.npm'
+  #   command: bash -c "npm run dev"
+  db:
+    image: postgres:12
+    container_name: 'maple_syrup_order_management-db'
     volumes:
-      - './:/usr/src/app'
-      - '/root/.npm'
-    command: bash -c "npm run dev"
+      - ./scripts/db/init.sh:/docker-entrypoint-initdb.d/init.sh
+      - ./scripts/db/dump.sql:/app/scripts/db/dump.sql
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=database
+    ports:
+      - 5432:5432

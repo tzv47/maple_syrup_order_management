@@ -9,7 +9,7 @@ export interface IMapleSyrup {
 }
 
 export enum MapleSyrupType {
-  AMBER,
-  DARK,
-  CLEAR,
+  AMBER = "AMBER",
+  DARK = "DARK",
+  CLEAR = "CLEAR",
 }
