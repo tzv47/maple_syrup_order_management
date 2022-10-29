@@ -1,18 +1,31 @@
 import { Request, Response, NextFunction } from 'express';
-import productService from '../../services/productService';
+import { Service } from 'typedi';
+import ProductService from '../../services/product.service.';
 import productMapper from './productMapper';
 
-export class ProductController {
+@Service()
+class ProductController {
+  constructor(private readonly productService: ProductService) {}
 
-    public static async getAllProduct(req: Request, res: Response, next: NextFunction) {
-        const productList = await productService.getAll()
-        res.send(productList.map(product => productMapper.toCatalogueItemDto(product))).status(200)
-    }
+  public async getAllProduct(req: Request, res: Response) {
+    const productList = await this.productService.getAll();
+    res
+      .send(
+        productList.map((product) => productMapper.toCatalogueItemDto(product))
+      )
+      .status(200);
+  }
 
-    public static async getProduct(req: Request, res: Response, next: NextFunction) {
-        const productId = req.params.id
-        const product = await productService.getProduct(productId)
-        const remainingAmount = await productService.getProductRemainingQty(productId)
-        res.send(productMapper.toMapleSyrupDto(product!!, remainingAmount)).status(200)
-    }
+  public async getProduct(req: Request, res: Response) {
+    const productId = req.params.id;
+    const product = await this.productService.getProduct(productId);
+    const remainingAmount = await this.productService.getProductRemainingQty(
+      productId
+    );
+    res
+      .send(productMapper.toMapleSyrupDto(product!!, remainingAmount))
+      .status(200);
+  }
 }
+
+export default ProductController;

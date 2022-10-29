@@ -1,4 +1,5 @@
-import { ICart } from '../../models';
+import { ICart } from './../../models/Cart';
+
 import { CartLineDto } from './dtos/cart.dto';
 
 class CartMapper {
@@ -6,9 +7,6 @@ class CartMapper {
     return carts.map((cart) =>
       Object.assign({
         productId: cart.productId,
-        name: cart.name,
-        image: cart.image,
-        price: cart.price,
         qty: cart.qty
       })
     );

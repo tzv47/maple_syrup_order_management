@@ -17,7 +17,9 @@
     "express": "^4.18.1",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.25.3"
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.25.3",
+    "typedi": "^0.10.0"
   },
   "devDependencies": {
     "@types/es6-promise": "^3.3.0",
