@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 import { OrderLineDto } from '../controllers/order/dtos/orderLine.dto';
 import { OrderStatus } from '../db/models/Order';
-import OrderRepository from '../db/repositories/order.repository';
+import { OrderRepository } from '../db/repositories';
 import ProductService from './product.service.';
 
 @Service()

@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import * as express from 'express';
 import Container, { Service } from 'typedi';
-import ProductController from '../controllers/product/productController';
+import { ProductController } from '../controllers';
 
 @Service()
 class ProductRouter {

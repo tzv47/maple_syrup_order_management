@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Service } from 'typedi';
-import CartService from '../../services/cart.service.';
+import { CartService } from '../../services/';
 import cartMapper from './cartMapper';
 
 @Service()
@@ -26,4 +26,4 @@ class CartController {
   }
 }
 
-export default CartController
+export default CartController;

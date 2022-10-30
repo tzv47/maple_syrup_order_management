@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Service } from 'typedi';
-import OrderService from '../../services/order.service.';
+import { OrderService } from '../../services/';
 import { OrderLineDto } from './dtos/orderLine.dto';
 import orderMapper from './orderMapper';
 

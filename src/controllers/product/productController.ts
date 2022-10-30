@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Service } from 'typedi';
-import ProductService from '../../services/product.service.';
+import { ProductService } from '../../services/';
 import productMapper from './productMapper';
 
 @Service()

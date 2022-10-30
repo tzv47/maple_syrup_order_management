@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import * as express from 'express';
 import Container, { Service } from 'typedi';
-import CartController from '../controllers/cart/cartController';
+import { CartController } from '../controllers';
 
 @Service()
 class CartRouter {

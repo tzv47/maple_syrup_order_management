@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 import { ICart } from '../db/models/Cart';
-import CartRepository from '../db/repositories/cart.repository';
+import { CartRepository } from '../db/repositories';
 
 @Service()
 class CartService {
