@@ -1,4 +1,4 @@
-import { MapleSyrupType } from "../../../models";
+import { MapleSyrupType } from "../../../db/models/Product";
 
 export interface CatalogueItemDto {
     id: string;

@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
-import { IMapleSyrup } from '../models/Product';
-import ProductRepository from '../repositories/product.repository.';
+import { IMapleSyrup } from '../db/models/Product';
+import ProductRepository from '../db/repositories/product.repository.';
 import CartService from './cart.service.';
 
 @Service()

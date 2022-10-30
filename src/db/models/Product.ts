@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize'
-import dbConfig from "../db/config"
+import dbConfig from "../config"
 
 export interface IMapleSyrup {
   id: string;

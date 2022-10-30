@@ -1,5 +1,4 @@
-import { ICart } from './../../models/Cart';
-
+import { ICart } from '../../db/models/Cart';
 import { CartLineDto } from './dtos/cart.dto';
 
 class CartMapper {

@@ -1,5 +1,5 @@
 import { Service } from 'typedi';
-import { IOrder, OrderInput } from './../models/Order';
+import { IOrder, OrderInput } from '../models/Order';
 import { Order } from '../models';
 
 @Service()
@@ -17,6 +17,7 @@ class OrderRepository {
   }
 
   async createOrder(payload: OrderInput): Promise<IOrder> {
+    console.log(payload)
     return await Order.create(payload);
   }
 }
