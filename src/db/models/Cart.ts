@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize'
 import dbConfig from "../config"
-import MapleSyrup from './Product';
+import Product from './Product';
 
 export interface ICart {
   id: string;
@@ -16,7 +16,7 @@ class Cart extends Model<ICart> implements ICart {
 
 Cart.init({
   id: { type: DataTypes.STRING, primaryKey: true },
-  productId: { type: DataTypes.STRING, references: {model: MapleSyrup, key: "id"} },
+  productId: { type: DataTypes.STRING, references: {model: Product, key: "id"} },
   qty: { type: DataTypes.DOUBLE },
 }, { sequelize: dbConfig, tableName: 'carts', timestamps: false })
 

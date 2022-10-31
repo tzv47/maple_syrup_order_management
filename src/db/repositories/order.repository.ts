@@ -1,5 +1,8 @@
+import { plainToInstance } from 'class-transformer';
 import { Service } from 'typedi';
-import { IOrder, OrderInput } from '../models/Order';
+
+import { CreateOrderInput } from './../models/Order';
+import { IOrder } from '../models/Order';
 import { Order } from '../models';
 
 @Service()
@@ -16,10 +19,11 @@ class OrderRepository {
     return order;
   }
 
-  async createOrder(payload: OrderInput): Promise<IOrder> {
-    console.log(payload)
-    return await Order.create(payload);
+  async createOrder({ productId, qty }: CreateOrderInput): Promise<IOrder> {
+    const order = plainToInstance(Order, { productId, qty });
+
+    return await order.save();
   }
 }
 
-export default OrderRepository
+export default OrderRepository;

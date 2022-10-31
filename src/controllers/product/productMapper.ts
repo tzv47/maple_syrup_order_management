@@ -1,11 +1,11 @@
 
-import { IMapleSyrup } from "../../db/models/Product";
+import { IProduct } from "../../db/models/Product";
 import { CatalogueItemDto } from "./dtos/catalogueItem.dto";
 import { MapleSyrupDto } from "./dtos/mapleSyrup.dto";
 
 class ProductMapper {
 
-    public toCatalogueItemDto(product: IMapleSyrup): CatalogueItemDto {
+    public toCatalogueItemDto(product: IProduct): CatalogueItemDto {
         return Object.assign({
             id: product.id,
             name: product.name,
@@ -16,7 +16,7 @@ class ProductMapper {
         })
     }
 
-    public toMapleSyrupDto(product: IMapleSyrup, inStock: number): MapleSyrupDto {
+    public toMapleSyrupDto(product: IProduct, inStock: number): MapleSyrupDto {
         const {id, name, description, image, price, type } = product
         return Object.assign ({
             id,

@@ -1,4 +1,4 @@
-import { MapleSyrupType } from "../../../db/models/Product";
+import { ProductType } from "../../../db/models/Product";
 
 export interface CatalogueItemDto {
     id: string;
@@ -7,5 +7,5 @@ export interface CatalogueItemDto {
     image: string;
     price: number;
     maxQty: number;
-    type: MapleSyrupType;
+    type: ProductType;
 }

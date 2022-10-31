@@ -1,6 +1,6 @@
-import { DataTypes, Model, Optional } from 'sequelize';
-import dbConfig from "../config"
-import MapleSyrup from './Product';
+import { DataTypes, Model, Optional, QueryTypes } from 'sequelize';
+import dbConfig from '../config';
+import Product from './Product';
 
 export interface IOrder {
   id: string;
@@ -14,9 +14,9 @@ export enum OrderStatus {
   FAILED = 'FAILED'
 }
 
-export interface OrderInput extends Optional<IOrder, 'id'> {}
+export interface CreateOrderInput extends Optional<IOrder, 'id'> {}
 
-class Order extends Model<IOrder, OrderInput> implements IOrder {
+class Order extends Model<IOrder, CreateOrderInput> implements IOrder {
   public id!: string;
   public productId!: string;
   public qty!: string;
@@ -25,10 +25,10 @@ class Order extends Model<IOrder, OrderInput> implements IOrder {
 
 Order.init(
   {
-    id: { type: DataTypes.STRING, primaryKey: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     productId: {
       type: DataTypes.STRING,
-      references: { model: MapleSyrup, key: 'id' }
+      references: { model: Product, key: 'id' }
     },
     qty: { type: DataTypes.DOUBLE },
     orderStatus: {

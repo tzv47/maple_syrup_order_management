@@ -1,6 +1,7 @@
 import { Service } from 'typedi';
+
 import { OrderLineDto } from '../controllers/order/dtos/orderLine.dto';
-import { OrderStatus } from '../db/models/Order';
+import { CreateOrderInput, OrderStatus } from '../db/models/Order';
 import { OrderRepository } from '../db/repositories';
 import ProductService from './product.service.';
 
@@ -23,13 +24,11 @@ class OrderService {
           errorList.push(`Not enough stock for productId: '${productId}'.`);
         } else {
           // store order
-          this.orderRepository.createOrder(
-            Object.assign({
-              productId,
-              qty,
-              orderStatus: OrderStatus.CREATED
-            })
-          );
+          const order = Object.assign({
+            productId,
+            qty
+          }) as CreateOrderInput;
+          this.orderRepository.createOrder(order);
         }
       })
     );

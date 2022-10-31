@@ -1,5 +1,5 @@
 import { Service } from 'typedi';
-import { IMapleSyrup } from '../db/models/Product';
+import { IProduct } from '../db/models/Product';
 import { ProductRepository, CartRepository } from '../db/repositories';
 
 @Service()
@@ -9,11 +9,11 @@ class ProductService {
     private readonly cartRepository: CartRepository
   ) {}
 
-  public async getProduct(id: string): Promise<IMapleSyrup> {
+  public async getProduct(id: string): Promise<IProduct> {
     return await this.productRepository.getById(id);
   }
 
-  public async getAll(): Promise<IMapleSyrup[]> {
+  public async getAll(): Promise<IProduct[]> {
     return await this.productRepository.getAllProducts();
   }
 

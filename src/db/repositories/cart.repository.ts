@@ -1,10 +1,12 @@
-import Cart, { ICart } from './../models/Cart';
 import { Service } from 'typedi';
+
+import { ICart } from './../models/Cart';
+import { Cart, Product } from '../models';
 
 @Service()
 class CartRepository {
   async getAllCarts(): Promise<ICart[]> {
-    return await Cart.findAll();
+    return await Cart.findAll({ include: Product });
   }
 
   async getCartByProductId(productId: string): Promise<ICart | null> {
@@ -26,4 +28,4 @@ class CartRepository {
   }
 }
 
-export default CartRepository
+export default CartRepository;

@@ -1,5 +1,14 @@
 import Cart from './Cart';
 import Order from './Order';
-import MapleSyrup from './Product';
+import Product from './Product';
 
-export { MapleSyrup, Order, Cart };
+Product.hasMany(Cart, {
+  sourceKey: 'id',
+  foreignKey: 'productId',
+  as: 'product',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE'
+});
+Cart.belongsTo(Product, { foreignKey: 'productId', targetKey: 'id' });
+
+export { Cart, Order, Product };

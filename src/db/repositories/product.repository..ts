@@ -1,15 +1,15 @@
 import { Service } from 'typedi';
-import { MapleSyrup } from '../models';
-import { IMapleSyrup } from '../models/Product';
+import { Product } from '../models';
+import { IProduct } from '../models/Product';
 
 @Service()
 class ProductRepository {
-  async getAllProducts(): Promise<IMapleSyrup[]> {
-    return await MapleSyrup.findAll();
+  async getAllProducts(): Promise<IProduct[]> {
+    return await Product.findAll();
   }
 
-  async getById(id: string): Promise<IMapleSyrup> {
-    const product = await MapleSyrup.findByPk(id);
+  async getById(id: string): Promise<IProduct> {
+    const product = await Product.findByPk(id);
     if (!product) {
       throw new Error('not found');
     }
