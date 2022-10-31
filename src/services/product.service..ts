@@ -24,6 +24,10 @@ class ProductService {
     );
     return product.maxQty - productInCarts!!.qty;
   }
+
+  public async updateProductMaxQty(id: string, qty: number): Promise<Product> {
+    return await this.productRepository.updateMaxqty(id, qty);
+  }
 }
 
 export default ProductService;

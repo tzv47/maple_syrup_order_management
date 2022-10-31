@@ -14,6 +14,12 @@ class ProductRepository {
     }
     return product;
   }
+
+  async updateMaxqty(id: string, qty: number): Promise<Product> {
+    const product = await this.getById(id);
+    product.maxQty = product.maxQty - qty;
+    return await product.save();
+  }
 }
 
 export default ProductRepository;

@@ -2,12 +2,13 @@ import { Service } from 'typedi';
 
 import { OrderLineDto } from '../controllers/order/dtos/orderLine.dto';
 import { CreateOrderInput, OrderStatus } from '../db/models/Order';
-import { OrderRepository } from '../db/repositories';
+import { CartRepository, OrderRepository } from '../db/repositories';
 import ProductService from './product.service.';
 
 @Service()
 class OrderService {
   constructor(
+    private readonly cartRepository: CartRepository,
     private readonly orderRepository: OrderRepository,
     private readonly productService: ProductService
   ) {}
@@ -29,6 +30,8 @@ class OrderService {
             qty
           }) as CreateOrderInput;
           this.orderRepository.createOrder(order);
+          this.cartRepository.updateCartQuantity(productId, qty);
+          this.productService.updateProductMaxQty(productId, qty);
         }
       })
     );

@@ -1,3 +1,5 @@
+import { CreateCartInput } from './../models/Cart';
+import { plainToInstance } from 'class-transformer';
 import { Service } from 'typedi';
 
 import { Cart, Product } from '../models';
@@ -12,6 +14,12 @@ class CartRepository {
 
   async getCartByProductId(productId: string): Promise<Cart | null> {
     return await Cart.findOne({ where: { productId } });
+  }
+
+  async createCart({ productId, qty }: CreateCartInput): Promise<Cart> {
+    const cart = plainToInstance(Cart, { productId, qty });
+
+    return await cart.save();
   }
 
   async removeFromCartByProductId(productId: string): Promise<void> {

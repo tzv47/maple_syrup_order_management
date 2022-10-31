@@ -1,4 +1,4 @@
-import { DataTypes, Model, NonAttribute } from 'sequelize';
+import { DataTypes, Model, NonAttribute, Optional } from 'sequelize';
 import dbConfig from '../config';
 import Product from './Product';
 
@@ -7,6 +7,8 @@ interface ICart {
   productId: string;
   qty: number;
 }
+
+export interface CreateCartInput extends Optional<ICart, 'id'> {}
 
 class Cart extends Model<ICart> implements ICart {
   public id!: string;
