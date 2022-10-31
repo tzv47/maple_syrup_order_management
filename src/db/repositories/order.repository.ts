@@ -2,16 +2,15 @@ import { plainToInstance } from 'class-transformer';
 import { Service } from 'typedi';
 
 import { CreateOrderInput } from './../models/Order';
-import { IOrder } from '../models/Order';
 import { Order } from '../models';
 
 @Service()
 class OrderRepository {
-  async getAllOrders(): Promise<IOrder[]> {
+  async getAllOrders(): Promise<Order[]> {
     return await Order.findAll();
   }
 
-  async getById(id: string): Promise<IOrder> {
+  async getById(id: string): Promise<Order> {
     const order = await Order.findByPk(id);
     if (!order) {
       throw new Error('not found');
@@ -19,7 +18,7 @@ class OrderRepository {
     return order;
   }
 
-  async createOrder({ productId, qty }: CreateOrderInput): Promise<IOrder> {
+  async createOrder({ productId, qty }: CreateOrderInput): Promise<Order> {
     const order = plainToInstance(Order, { productId, qty });
 
     return await order.save();

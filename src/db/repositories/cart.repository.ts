@@ -1,15 +1,16 @@
 import { Service } from 'typedi';
 
-import { ICart } from './../models/Cart';
 import { Cart, Product } from '../models';
 
 @Service()
 class CartRepository {
-  async getAllCarts(): Promise<ICart[]> {
-    return await Cart.findAll({ include: Product });
+  async getAllCarts(): Promise<Cart[]> {
+    return await Cart.findAll({
+      include: [{ model: Product, as: 'product' }]
+    });
   }
 
-  async getCartByProductId(productId: string): Promise<ICart | null> {
+  async getCartByProductId(productId: string): Promise<Cart | null> {
     return await Cart.findOne({ where: { productId } });
   }
 
@@ -17,7 +18,7 @@ class CartRepository {
     await Cart.destroy({ where: { productId } });
   }
 
-  async updateCartQuantity(productId: string, newQty: number): Promise<ICart> {
+  async updateCartQuantity(productId: string, newQty: number): Promise<Cart> {
     const cart = await Cart.findOne({ where: { productId } });
     if (!cart) {
       throw new Error('not found');

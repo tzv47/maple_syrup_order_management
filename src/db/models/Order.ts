@@ -2,7 +2,7 @@ import { DataTypes, Model, Optional, QueryTypes } from 'sequelize';
 import dbConfig from '../config';
 import Product from './Product';
 
-export interface IOrder {
+interface IOrder {
   id: string;
   productId: string;
   qty: string;

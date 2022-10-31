@@ -1,16 +1,16 @@
 import { Service } from 'typedi';
-import { ICart } from '../db/models/Cart';
+import Cart from '../db/models/Cart';
 import { CartRepository } from '../db/repositories';
 
 @Service()
 class CartService {
   constructor(private readonly cartRepository: CartRepository) {}
 
-  public async getAll(): Promise<ICart[]> {
+  public async getAll(): Promise<Cart[]> {
     return await this.cartRepository.getAllCarts();
   }
 
-  public async findByProductId(productId: string): Promise<ICart | null> {
+  public async findByProductId(productId: string): Promise<Cart | null> {
     return await this.cartRepository.getCartByProductId(productId);
   }
 
@@ -21,7 +21,7 @@ class CartService {
   public async updateCartQuantity(
     productId: string,
     newQty: number
-  ): Promise<ICart> {
+  ): Promise<Cart> {
     return await this.cartRepository.updateCartQuantity(productId, newQty);
   }
 }
