@@ -11,7 +11,7 @@ const mockProductRepository = createMock<ProductRepository>({
   },
   updateMaxqty: async (id: string, qty: number) => {
     const product = products.find((product) => product.id == id)!!;
-    product.maxQty = product.maxQty = qty;
+    product.maxQty = qty;
     return product;
   }
 });
