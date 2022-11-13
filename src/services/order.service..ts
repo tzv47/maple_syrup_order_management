@@ -1,15 +1,13 @@
 import { Service } from 'typedi';
 
 import { OrderLineDto } from '../controllers/order/dtos/orderLine.dto';
-import { CreateOrderInput, OrderStatus } from '../db/models/Order';
-import { CartRepository, OrderRepository } from '../db/repositories';
+import { CartRepository } from '../db/repositories';
 import ProductService from './product.service.';
 
 @Service()
 class OrderService {
   constructor(
     private readonly cartRepository: CartRepository,
-    private readonly orderRepository: OrderRepository,
     private readonly productService: ProductService
   ) {}
 
@@ -18,20 +16,20 @@ class OrderService {
 
     await Promise.all(
       orderDtos.map(async ({ productId, qty }) => {
+        const cart = await this.cartRepository.getCartByProductId(productId);
         const remaingQty = await this.productService.getProductRemainingQty(
           productId
         );
-        if (remaingQty < qty) {
+        if (!cart) {
+          errorList.push(`No cart found for productId: '${productId}'.`);
+        } else if (remaingQty < qty) {
           errorList.push(`Not enough stock for productId: '${productId}'.`);
         } else {
-          // store order
-          const order = Object.assign({
+          this.cartRepository.removeFromCartByProductId(productId);
+          this.productService.updateProductMaxQty(
             productId,
-            qty
-          }) as CreateOrderInput;
-          this.orderRepository.createOrder(order);
-          this.cartRepository.updateCartQuantity(productId, qty);
-          this.productService.updateProductMaxQty(productId, qty);
+            remaingQty - (cart.qty - qty)
+          );
         }
       })
     );
