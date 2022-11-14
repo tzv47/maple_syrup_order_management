@@ -9,16 +9,20 @@ class CartRouter {
 
   getRouter() {
     const router = express.Router();
-    router.get('', (req, res) => this.cartController.getCart(req, res));
-
-    router.post('', (req, res) => this.cartController.createCart(req, res));
-
-    router.patch('/product/:productId', (req, res) =>
-      this.cartController.updateCartQty(req, res)
+    router.get('', (req, res, next) =>
+      this.cartController.getCart(req, res, next)
     );
 
-    router.delete('/product/:productId', (req, res) =>
-      this.cartController.deleteCart(req, res)
+    router.post('', (req, res, next) =>
+      this.cartController.createCart(req, res, next)
+    );
+
+    router.patch('/product/:productId', (req, res, next) =>
+      this.cartController.updateCartQty(req, res, next)
+    );
+
+    router.delete('/product/:productId', (req, res, next) =>
+      this.cartController.deleteCart(req, res, next)
     );
 
     return router;

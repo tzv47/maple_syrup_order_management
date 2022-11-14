@@ -9,12 +9,12 @@ class ProductRouter {
 
   getRouter() {
     const router = express.Router();
-    router.get('', (req, res) =>
-      this.productController.getAllProduct(req, res)
+    router.get('', (req, res, next) =>
+      this.productController.getAllProduct(req, res, next)
     );
 
-    router.get('/:id', (req, res) =>
-      this.productController.getProduct(req, res)
+    router.get('/:id', (req, res, next) =>
+      this.productController.getProduct(req, res, next)
     );
 
     return router;

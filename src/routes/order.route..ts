@@ -9,7 +9,9 @@ class OrderRouter {
 
   getRouter() {
     const router = express.Router();
-    router.post('', (req, res) => this.orderController.placeOrder(req, res));
+    router.post('', (req, res, next) =>
+      this.orderController.placeOrder(req, res, next)
+    );
 
     return router;
   }

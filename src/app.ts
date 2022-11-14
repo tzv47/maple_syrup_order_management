@@ -35,6 +35,13 @@ class App {
         }
       })
     );
+    this.app.use(
+      (error: any, req: Request, res: Response, next: NextFunction) => {
+        console.log(`error ${error.message}`);
+        const status = error.status || 400;
+        res.status(status).send(error.message);
+      }
+    );
   }
 }
 

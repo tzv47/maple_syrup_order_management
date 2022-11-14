@@ -9,32 +9,48 @@ import cartMapper from './cartMapper';
 class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  public async getCart(req: Request, res: Response) {
+  public async getCart(req: Request, res: Response, next: NextFunction) {
     const user = getUserFromRequest(req);
-    const data = await this.cartService.getAll(user);
-    res.send(cartMapper.toCartLineDtos(data)).status(200);
+    try {
+      const data = await this.cartService.getAll(user);
+      res.send(cartMapper.toCartLineDtos(data)).status(200);
+    } catch (error) {
+      next(error);
+    }
   }
 
-  public async createCart(req: Request, res: Response) {
+  public async createCart(req: Request, res: Response, next: NextFunction) {
     const user = getUserFromRequest(req);
     const createCartDto = req.body as CreateCartDto;
-    const data = await this.cartService.createCart(createCartDto, user);
-    res.sendStatus(202);
+    try {
+      const data = await this.cartService.createCart(createCartDto, user);
+      res.sendStatus(202);
+    } catch (error) {
+      next(error);
+    }
   }
 
-  public async updateCartQty(req: Request, res: Response) {
+  public async updateCartQty(req: Request, res: Response, next: NextFunction) {
     const productId = req.params.productId;
     const { newQty } = req.body;
     const user = getUserFromRequest(req);
-    this.cartService.updateCartQuantity(productId, newQty, user);
-    res.sendStatus(202);
+    try {
+      this.cartService.updateCartQuantity(productId, newQty, user);
+      res.sendStatus(202);
+    } catch (error) {
+      next(error);
+    }
   }
 
-  public async deleteCart(req: Request, res: Response) {
+  public async deleteCart(req: Request, res: Response, next: NextFunction) {
     const productId = req.params.productId;
     const user = getUserFromRequest(req);
-    this.cartService.removeFromCartByProductId(productId, user);
-    res.sendStatus(202);
+    try {
+      this.cartService.removeFromCartByProductId(productId, user);
+      res.sendStatus(202);
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
