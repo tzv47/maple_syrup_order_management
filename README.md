@@ -36,6 +36,18 @@ For first time run, pelase install the package dependencies via the command belo
 
 `docker-compose build && docker-compose up`
 
+#### Authentication
+This app use basic auth as means of authentication. You can use following credential as test:
+| User | Password  
+| :---:   | :---: 
+| tzv | supersecret   
+| testUser | password1234   
+
+
+#### Documentation
+
+For local development, a Swagger UI based docs are being served at following url: http://localhost:8080/swagger
+
 ## Developer Note
 
 When developing this app, i have made following assumption:
