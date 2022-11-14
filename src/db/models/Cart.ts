@@ -1,4 +1,10 @@
-import { DataTypes, Model, NonAttribute, Optional } from 'sequelize';
+import {
+  DataTypes,
+  Model,
+  NonAttribute,
+  Optional,
+  QueryTypes
+} from 'sequelize';
 import dbConfig from '../config';
 import Product from './Product';
 
@@ -31,5 +37,15 @@ Cart.init(
   },
   { sequelize: dbConfig, tableName: 'carts', timestamps: false }
 );
+
+Cart.beforeSave(async (cart) => {
+  const lastVal = (await Cart.sequelize?.query(
+    'SELECT MAX(cast(SUBSTR(id, 6) as int)) FROM carts;',
+    { type: QueryTypes.SELECT }
+  )) as { max: number }[];
+  const nextValue = lastVal ? (lastVal[0].max as number) + 1 : 1;
+
+  cart.id = `CART-${String(nextValue).padStart(3, '0')}`;
+});
 
 export default Cart;

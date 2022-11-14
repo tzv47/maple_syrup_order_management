@@ -11,6 +11,8 @@ class CartRouter {
     const router = express.Router();
     router.get('', (req, res) => this.cartController.getCart(req, res));
 
+    router.post('', (req, res) => this.cartController.createCart(req, res));
+
     router.patch('/product/:productId', (req, res) =>
       this.cartController.updateCartQty(req, res)
     );

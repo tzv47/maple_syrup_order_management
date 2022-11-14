@@ -21,8 +21,8 @@ class CartRepository {
     return await Cart.findOne({ where: query });
   }
 
-  async createCart({ productId, qty }: CreateCartInput): Promise<Cart> {
-    const cart = plainToInstance(Cart, { productId, qty });
+  async createCart(createCartInput: CreateCartInput): Promise<Cart> {
+    const cart = plainToInstance(Cart, createCartInput);
 
     return await cart.save();
   }

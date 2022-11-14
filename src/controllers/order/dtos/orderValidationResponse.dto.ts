@@ -1,4 +1,4 @@
-export interface OrderValidationResponseDto {
-    isOrderValid: boolean,
-    errors: Array<string>
-}
+export type OrderValidationResponseDto = {
+  isOrderValid: boolean;
+  errors: Array<string>;
+};
