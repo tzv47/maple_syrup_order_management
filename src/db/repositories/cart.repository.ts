@@ -6,14 +6,19 @@ import { Cart, Product } from '../models';
 
 @Service()
 class CartRepository {
-  async getAllCarts(): Promise<Cart[]> {
+  async getAllCarts(query: {} = {}): Promise<Cart[]> {
     return await Cart.findAll({
+      where: query,
       include: [{ model: Product, as: 'product' }]
     });
   }
 
-  async getCartByProductId(productId: string): Promise<Cart | null> {
-    return await Cart.findOne({ where: { productId } });
+  async getCartByProductId(
+    productId: string,
+    adttionalQuery: {} = {}
+  ): Promise<Cart | null> {
+    const query = { productId, ...adttionalQuery };
+    return await Cart.findOne({ where: query });
   }
 
   async createCart({ productId, qty }: CreateCartInput): Promise<Cart> {
@@ -22,12 +27,21 @@ class CartRepository {
     return await cart.save();
   }
 
-  async removeFromCartByProductId(productId: string): Promise<void> {
-    await Cart.destroy({ where: { productId } });
+  async removeFromCartByProductId(
+    productId: string,
+    adttionalQuery: {} = {}
+  ): Promise<void> {
+    const query = { productId, ...adttionalQuery };
+    await Cart.destroy({ where: query });
   }
 
-  async updateCartQuantity(productId: string, newQty: number): Promise<Cart> {
-    const cart = await Cart.findOne({ where: { productId } });
+  async updateCartQuantity(
+    productId: string,
+    newQty: number,
+    adttionalQuery: {} = {}
+  ): Promise<Cart> {
+    const query = { productId, ...adttionalQuery };
+    const cart = await Cart.findOne({ where: query });
     if (!cart) {
       throw new Error('not found');
     }

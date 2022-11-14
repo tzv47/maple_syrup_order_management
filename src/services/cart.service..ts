@@ -6,23 +6,32 @@ import { CartRepository } from '../db/repositories';
 class CartService {
   constructor(private readonly cartRepository: CartRepository) {}
 
-  public async getAll(): Promise<Cart[]> {
-    return await this.cartRepository.getAllCarts();
+  public async getAll(user: string): Promise<Cart[]> {
+    return await this.cartRepository.getAllCarts({ user });
   }
 
-  public async findByProductId(productId: string): Promise<Cart | null> {
-    return await this.cartRepository.getCartByProductId(productId);
+  public async findByProductId(
+    productId: string,
+    user: string
+  ): Promise<Cart | null> {
+    return await this.cartRepository.getCartByProductId(productId, { user });
   }
 
-  public async removeFromCartByProductId(productId: string): Promise<void> {
-    await this.cartRepository.removeFromCartByProductId(productId);
+  public async removeFromCartByProductId(
+    productId: string,
+    user: string
+  ): Promise<void> {
+    await this.cartRepository.removeFromCartByProductId(productId, { user });
   }
 
   public async updateCartQuantity(
     productId: string,
-    newQty: number
+    newQty: number,
+    user: string
   ): Promise<Cart> {
-    return await this.cartRepository.updateCartQuantity(productId, newQty);
+    return await this.cartRepository.updateCartQuantity(productId, newQty, {
+      user
+    });
   }
 }
 

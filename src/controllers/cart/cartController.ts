@@ -1,3 +1,4 @@
+import { getUserFromRequest } from './../../utils/utils';
 import { Request, Response, NextFunction } from 'express';
 import { Service } from 'typedi';
 import { CartService } from '../../services/';
@@ -8,20 +9,23 @@ class CartController {
   constructor(private readonly cartService: CartService) {}
 
   public async getCart(req: Request, res: Response) {
-    const data = await this.cartService.getAll();
+    const user = getUserFromRequest(req);
+    const data = await this.cartService.getAll(user);
     res.send(cartMapper.toCartLineDtos(data)).status(200);
   }
 
   public async updateCartQty(req: Request, res: Response) {
     const productId = req.params.productId;
     const { newQty } = req.body;
-    this.cartService.updateCartQuantity(productId, newQty);
+    const user = getUserFromRequest(req);
+    this.cartService.updateCartQuantity(productId, newQty, user);
     res.sendStatus(202);
   }
 
   public async deleteCart(req: Request, res: Response) {
     const productId = req.params.productId;
-    this.cartService.removeFromCartByProductId(productId);
+    const user = getUserFromRequest(req);
+    this.cartService.removeFromCartByProductId(productId, user);
     res.sendStatus(202);
   }
 }

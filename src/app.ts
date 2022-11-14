@@ -1,6 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import basicAuth from 'express-basic-auth';
 import { Routes } from './routes';
 
 class App {
@@ -26,6 +27,14 @@ class App {
     this.app.use(cors<Request>());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(
+      basicAuth({
+        users: {
+          tzv: 'supersecret',
+          testUser: 'password1234'
+        }
+      })
+    );
   }
 }
 

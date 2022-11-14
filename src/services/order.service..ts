@@ -11,12 +11,17 @@ class OrderService {
     private readonly productService: ProductService
   ) {}
 
-  public async createOrder(orderDtos: Array<OrderLineDto>): Promise<string[]> {
+  public async createOrder(
+    orderDtos: Array<OrderLineDto>,
+    user: string
+  ): Promise<string[]> {
     const errorList: Array<string> = [];
 
     await Promise.all(
       orderDtos.map(async ({ productId, qty }) => {
-        const cart = await this.cartRepository.getCartByProductId(productId);
+        const cart = await this.cartRepository.getCartByProductId(productId, {
+          user
+        });
         const remaingQty = await this.productService.getProductRemainingQty(
           productId
         );

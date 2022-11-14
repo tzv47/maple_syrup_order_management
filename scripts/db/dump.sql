@@ -3,14 +3,7 @@ CREATE TABLE carts (
   "id" TEXT NOT NULL,
   "productId" TEXT NOT NULL,
   "qty" INT NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE orders (
-  "id" SERIAL INT NOT NULL,
-  "productId" TEXT NOT NULL,
-  "qty" INT NOT NULL,
-  "orderStatus" TEXT NOT NULL,
+  "user" TEXT NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -26,9 +19,10 @@ CREATE TABLE products (
 );
 
 -- Seed
-INSERT INTO carts ("id", "productId", "qty") VALUES ('CART-001', '001', 20);
-INSERT INTO carts ("id", "productId", "qty") VALUES ('CART-002', '002', 20);
-INSERT INTO carts ("id", "productId", "qty") VALUES ('CART-003', '003', 20);
+INSERT INTO carts ("id", "productId", "qty", "user") VALUES ('CART-001', '001', 20, 'tzv');
+INSERT INTO carts ("id", "productId", "qty", "user") VALUES ('CART-004', '001', 3, 'testUser');
+INSERT INTO carts ("id", "productId", "qty", "user") VALUES ('CART-002', '002', 20, 'tzv');
+INSERT INTO carts ("id", "productId", "qty", "user") VALUES ('CART-003', '003', 20, 'tzv');
 
 INSERT INTO products ("id", "name", "description", "image", "price", "maxQty", "type") VALUES ('001', 'Amber maple syrup', 'Maple Syrup type AMBER','http://localhost/amber.png', 20, 50, 'AMBER');
 INSERT INTO products ("id", "name", "description", "image", "price", "maxQty", "type") VALUES ('002', 'Dark maple syrup', 'Maple Syrup type DARK','http://localhost/amber.png', 20, 50, 'DARK');
