@@ -23,7 +23,6 @@
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.25.3",
-    "ts-jest-mock": "^1.1.33",
     "ts-node": "^10.9.1",
     "typedi": "^0.10.0"
   },
