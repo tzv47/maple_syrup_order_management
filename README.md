@@ -1,7 +1,7 @@
 # Maple Syrup Management Service
 
-    Overview: Manage maple syrup products selection, cart, and order
-    The application is listening on port 8080, for local development this translates to http://localhost:8080
+  Overview: Manage maple syrup products selection, cart, and order
+  The application is listening on port 8080, for local development this translates to http://localhost:8080
 
 ## Prerequisites
 
