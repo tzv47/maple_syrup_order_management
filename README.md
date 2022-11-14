@@ -41,10 +41,18 @@ For first time run, pelase install the package dependencies via the command belo
 When developing this app, i have made following assumption:
 
 - Cart
-    * A cart can only contain a single product for a given user
+
+  - A cart can only contain a single product for a given user
 
 - Order
-    * For a successful order for a given user, cart will be "consumed" and product max qty will be deducted
+
+  - For a successful order for a given user, cart will be "consumed" and product max qty will be deducted
 
 - Product
-    * Product max qty will be not affected during creating/modification of a cart related to a product, only during a successful order transaction
+  - Product max qty will be not affected during creating/modification of a cart related to a product, only during a successful order transaction
+
+## TODO
+
+- Integration test
+- User controller & service
+- JWT based auth
