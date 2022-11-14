@@ -17,9 +17,12 @@ const productRepository: jest.Mocked<ProductRepository> = {
   updateMaxqty: jest.fn()
 };
 
+const _products = products;
+
 describe('ProductServiceTest', () => {
   let productService: ProductService;
   beforeEach(() => {
+    jest.restoreAllMocks();
     productRepository.getAllProducts = jest
       .fn()
       .mockImplementation(() => Promise.resolve(products));
@@ -43,9 +46,19 @@ describe('ProductServiceTest', () => {
     });
 
     it('should get all product', async () => {
-      const products = await productService.getAll();
+      const products = await productService.getAll(null);
 
       expect(products.length).toEqual(3);
+    });
+
+    it('should get product type AMBER', async () => {
+      productRepository.getAllProducts = jest
+        .fn()
+        .mockImplementation(() => Promise.resolve([_products[0]]));
+
+      const products = await productService.getAll('Amber');
+
+      expect(products.length).toEqual(1);
     });
 
     it('should get product remaing qty', async () => {

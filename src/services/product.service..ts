@@ -13,8 +13,9 @@ class ProductService {
     return await this.productRepository.getById(id);
   }
 
-  public async getAll(): Promise<Product[]> {
-    return await this.productRepository.getAllProducts();
+  public async getAll(type: string | null): Promise<Product[]> {
+    const query = type ? { type } : {};
+    return await this.productRepository.getAllProducts(query);
   }
 
   public async getProductRemainingQty(productId: string): Promise<number> {

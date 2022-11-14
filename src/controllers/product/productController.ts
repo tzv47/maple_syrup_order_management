@@ -8,7 +8,8 @@ class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   public async getAllProduct(req: Request, res: Response) {
-    const productList = await this.productService.getAll();
+    const proudctType = req.query?.type as string | null;
+    const productList = await this.productService.getAll(proudctType);
     res
       .send(
         productList.map((product) => productMapper.toCatalogueItemDto(product))

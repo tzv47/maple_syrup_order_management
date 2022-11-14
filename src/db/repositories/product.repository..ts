@@ -3,8 +3,8 @@ import { Product } from '../models';
 
 @Service()
 class ProductRepository {
-  async getAllProducts(): Promise<Product[]> {
-    return await Product.findAll();
+  async getAllProducts(query: {} = {}): Promise<Product[]> {
+    return await Product.findAll({ where: query });
   }
 
   async getById(id: string): Promise<Product> {
