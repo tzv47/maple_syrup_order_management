@@ -34,6 +34,8 @@ For first time run, pelase install the package dependencies via the command belo
 
 ## Running
 
+This app can be run by following command:
+
 `docker-compose build && docker-compose up`
 
 #### Authentication
