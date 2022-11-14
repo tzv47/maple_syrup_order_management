@@ -2,6 +2,8 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import basicAuth from 'express-basic-auth';
+import swaggerUi from 'swagger-ui-express';
+import * as swaggerDocument from './../swagger.json';
 import { Routes } from './routes';
 
 class App {
@@ -15,6 +17,7 @@ class App {
   }
 
   private config(): void {
+    this.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     this.app.use((req: Request, res: Response, next: NextFunction) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header(
